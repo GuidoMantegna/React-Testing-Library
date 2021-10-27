@@ -1,30 +1,11 @@
 import React from 'react'
 import TodoFooter from '../TodoFooter/TodoFooter'
 import "./TodoList.css"
+import { calcNumberOfIncompletedTasks, deletTask, updateTask } from '../../utils/todos'
 
 function TodoList({
     todos, setTodos
 }) {
-
-    const updateTask = (id) => {
-        let updatedTasks = todos.map((todo) => {
-            if(todo.id === id) {
-                todo.completed = !todo.completed;
-                return todo
-            } else {
-                return todo
-            }
-        });
-        setTodos(updatedTasks)
-    }
-
-    const calcNumberOfIncompletedTasks = () => {
-        let count = 0;
-        todos.forEach(todo => {
-            if(!todo.completed) count++
-        })
-        return count
-    }
 
     return (
         <div className="todolist-container">
@@ -34,9 +15,26 @@ function TodoList({
                         todos.map((todo, index) => (
                             <div 
                                 className={`todo-item ${todo.completed && "todo-item-active"}`} 
-                                onClick={() => updateTask(todo.id)}
-                            >
-                                {todo.task}
+                                key={todo.id}
+                                >
+                                <p> {todo.task} </p>
+                                <div className="todo-actions">
+                                    <img 
+                                    src="https://icongr.am/entypo/check.svg?size=20&color=505035"
+                                    className="check-btn" 
+                                    // onClick={() => updateTask(todo.id)}
+                                    onClick={() => setTodos(updateTask(todo.id, todos))} 
+                                    />
+                                    <img 
+                                    src="https://icongr.am/entypo/edit.svg?size=20&color=505035"
+                                    className="edit-btn" 
+                                    />
+                                    <img 
+                                    src="https://icongr.am/entypo/trash.svg?size=20&color=505035"
+                                    className="delete-btn"
+                                    onClick={() => setTodos(deletTask(todo.id, todos))} 
+                                    />
+                                </div>    
                             </div>
                         ))
                     }
@@ -44,7 +42,7 @@ function TodoList({
             </div>
             <div>
                 <TodoFooter 
-                    numberOfIncompleteTasks={calcNumberOfIncompletedTasks()}
+                    numberOfIncompleteTasks={calcNumberOfIncompletedTasks(todos)}
                 />
             </div>
         </div>

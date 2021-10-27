@@ -28,30 +28,30 @@ it('should be able to type into input', () => {
     expect(divElement).toBeInTheDocument()
 });
 
-it('should render multiple items', () => {
-    render(
-        <MockTodo />
-    );
-    addTask(["Go Grocery Shopping", "Go Grocery Shopping", "Go Grocery Shopping"])
-    const divElements = screen.queryAllByText(/Go Grocery Shopping/i);
-    expect(divElements.length).toBe(3)
-});
+// it('should render multiple items', () => {
+//     render(
+//         <MockTodo />
+//     );
+//     addTask(["Go Grocery Shopping", "Go Grocery Shopping", "Go Grocery Shopping"])
+//     const divElements = screen.queryAllByText(/Go Grocery Shopping/i);
+//     expect(divElements.length).toBe(3)
+// });
 
-it('task should not have complete class when initally rendered', () => {
-    render(
-        <MockTodo />
-    );
-    addTask(["Go Grocery Shopping"])
-    const divElement = screen.getByText(/Go Grocery Shopping/i);
-    expect(divElement).not.toHaveClass("todo-item-active")
-});
+// it('task should not have complete class when initally rendered', () => {
+//     render(
+//         <MockTodo />
+//     );
+//     addTask(["Go Grocery Shopping"])
+//     const divElement = screen.getByText(/Go Grocery Shopping/i);
+//     expect(divElement).not.toHaveClass("todo-item-active")
+// });
 
-it('task should have complete class when clicked', () => {
-    render(
-        <MockTodo />
-    );
-    addTask(["Go Grocery Shopping"])
-    const divElement = screen.getByText(/Go Grocery Shopping/i);
-    fireEvent.click(divElement)
-    expect(divElement).toHaveClass("todo-item-active")
-});
+// it('task should have complete class when clicked', () => {
+//     render(
+//         <MockTodo />
+//     );
+//     addTask(["Go Grocery Shopping"])
+//     const divElement = screen.getByText(/Go Grocery Shopping/i);
+//     fireEvent.click(divElement)
+//     expect(divElement).toHaveClass("todo-item-active")
+// });
